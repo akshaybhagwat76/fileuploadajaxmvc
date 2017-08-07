@@ -1,0 +1,52 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/bootstrap.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <title>ImageUpload</title>
+    <script src="~/jquery-3.2.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            debugger;
+
+            alert("Image");
+
+           
+        });
+        var f1 = function () {
+            debugger;
+            var file = $("#img").get(0).files;
+            var data = new FormData();
+            data.append("imageFile", file[0]);
+            data.append("ProductName", "Guitar");
+
+            $.ajax({
+                type: "POST",
+                url: "/Home/ImageUpload",
+                data: data,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    $("#ddiv").append('<img src="/imagefolder/' + response + '" class="img-responsive thumbnail"/>');
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container" style="margin-top:20px;width:60%">
+
+
+        <input type="file" id="img" />
+        <a href="#" class="btn btn-default" onclick="f1()">Upload Image</a>
+    </div>
+    <div class="col-md-2 thumbnail" id="ddiv">
+
+    </div>
+</body>
+</html>
