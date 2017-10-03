@@ -12,6 +12,10 @@ namespace FileUploadMVCAJAX.Controllers
     {
         //
         // GET: /Home/
+        public ActionResult  DatepickerCounter()
+        {
+            return View();
+        }
         public ActionResult Index()
         {
             return View();
@@ -29,6 +33,33 @@ namespace FileUploadMVCAJAX.Controllers
             }
             return Json(file.FileName, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public ActionResult Savefile(String Name,float Price)
+        {
+            var uniqueName = "";
+            if (Request.Files["myFile"]!=null)
+            {
+                var file = Request.Files["myFile"];
+                if (file.FileName!="")
+                {
 
+                    var ext = System.IO.Path.GetExtension(file.FileName);
+                    uniqueName = Guid.NewGuid().ToString() + ext;
+                    var rootPath = Server.MapPath("~/imagefolder/");
+                    var filesave = System.IO.Path.Combine(rootPath, uniqueName);
+                }
+            }
+            var data = new
+            {
+                success = false,
+                name = uniqueName
+            };
+
+            return Json(data,JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult google()
+        {
+            return View();
+        }
     }
 }
