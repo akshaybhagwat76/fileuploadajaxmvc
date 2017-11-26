@@ -61,5 +61,9 @@ namespace FileUploadMVCAJAX.Controllers
         {
             return View();
         }
+        public ActionResult ddSlick()
+        {
+            return View();
+        }
     }
 }
